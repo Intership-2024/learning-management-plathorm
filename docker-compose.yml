@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    networks:
+      - lmsNetwork
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecretpassword
+      MYSQL_DATABASE: lms_production_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    image: lms # Replace with your actual application image
+    container_name: app
+    networks:
+      - lmsNetwork
+    build:
+      context: .
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: lms_production_db
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: supersecretpassword
+      DATABASE_URL: jdbc:mysql://mysql:3306/lms_production_db?createDatabaseIfNotExist=true
+    ports:
+      - "8080:8080" # Replace with your application's port if different
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+
+networks:
+  lmsNetwork:
+    driver: bridge
