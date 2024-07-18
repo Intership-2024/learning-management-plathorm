@@ -12,7 +12,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'oracle'
-          cache: gradle
 
       - name: gradle clean build
         run: ./gradlew build
