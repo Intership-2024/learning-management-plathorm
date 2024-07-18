@@ -15,4 +15,4 @@ jobs:
           cache: gradle
 
       - name: gradle clean build
-        run: gradle clean build
+        run: ./gradlew build
