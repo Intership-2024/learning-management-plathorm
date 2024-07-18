@@ -14,4 +14,4 @@ jobs:
           distribution: 'oracle'
 
       - name: gradle clean build
-        run: ./gradlew build
+        run: gradle clean build
