@@ -17,12 +17,10 @@ jobs:
         run: gradle clean build
       - name: SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=Intership-2024_learning-management-plathorm-api
+            -Dsonar.organization=intership-2024
+            -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=Intership-2024_learning-management-plathorm-api \
-            -Dsonar.organization=intership-2024 \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.java.binaries=build/classes
