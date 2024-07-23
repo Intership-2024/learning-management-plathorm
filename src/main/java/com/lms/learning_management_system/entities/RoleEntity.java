@@ -1,10 +1,11 @@
 package com.lms.learning_management_system.entities;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.util.UUID;
 
 @Entity
+@Data
 public class RoleEntity {
     @Id
     @GeneratedValue
@@ -12,21 +13,4 @@ public class RoleEntity {
 
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
-
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public RoleEnum getRole() {
-        return role;
-    }
-
-    public void setRole(RoleEnum role) {
-        this.role = role;
-    }
 }
