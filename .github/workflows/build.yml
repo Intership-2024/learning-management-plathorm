@@ -33,9 +33,9 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: gradle clean build jacocoTestReport sonar
+          arguments: clean build jacocoTestReport sonarqube
 
-      - name: Gradle build
-        run: ./gradlew build jacocoTestReport sonarqube
+      - name: Gradle build and SonarQube analysis
+        run: ./gradlew clean build jacocoTestReport sonarqube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
