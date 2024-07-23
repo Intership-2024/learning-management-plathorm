@@ -33,7 +33,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: clean build jacocoTestReport sonarqube
+          arguments: gradle clean build jacocoTestReport sonar
 
       - name: Gradle build
         run: ./gradlew build jacocoTestReport sonarqube
