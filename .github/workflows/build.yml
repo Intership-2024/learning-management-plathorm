@@ -15,3 +15,7 @@ jobs:
 
       - name: gradle clean build
         run: gradle clean build
+      - name: SonarCloud
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
