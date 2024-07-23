@@ -21,13 +21,11 @@ test {
 	finalizedBy jacocoTestReport // Run JaCoCo after tests
 }
 
-sonarqube {
+sonar {
 	properties {
 		property "sonar.projectKey", "Intership-2024_learning-management-plathorm-api"
-		property "sonar.organization", "Intership-2024"
+		property "sonar.organization", "intership-2024"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.login", System.getenv("SONAR_TOKEN")
-		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }
 
