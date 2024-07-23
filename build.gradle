@@ -23,7 +23,7 @@ test {
 
 sonarqube {
 	properties {
-		property "sonar.projectKey", "ntership-2024_learning-management-plathorm-api"
+		property "sonar.projectKey", "intership-2024_learning-management-plathorm-api"
 		property "sonar.organization", "intership-2024"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.login", System.getenv("SONAR_TOKEN")
