@@ -8,7 +8,7 @@ services:
       - lmsNetwork
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_DATABASE: lms_production_db
+      MYSQL_DATABASE: ${MYSQL_DB}
     ports:
       - "3306:3306"
     volumes:
@@ -23,12 +23,12 @@ services:
       context: .
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      MYSQL_HOST: mysql
-      MYSQL_PORT: 3306
-      MYSQL_DB: lms_production_db
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DB: ${MYSQL_DB}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      DATABASE_URL: jdbc:mysql://mysql:3306/lms_production_db?createDatabaseIfNotExist=true
+      DATABASE_URL: jdbc:mysql://mysql:${MYSQL_PORT}/${MYSQL_DB}?createDatabaseIfNotExist=true
     ports:
       - "8080:8080"
     depends_on:
