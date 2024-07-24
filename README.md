@@ -13,12 +13,24 @@ You would need the following tools installed before running the project locally:
 - IntelliJ IDEA (or any preferred IDE)
 - Docker
 
-### Setup the database
+### Configure environment variables
 
-/TO DO.../
+1. Create .env file in the root folder with database credentials:
+
+```
+MYSQL_HOST=Localhost
+MYSQL_PORT=3306
+MYSQL_DB=ms_production_db
+MYSQL_ALLOW_EMPTY_PASSWORD=false
+DATABASE_URL=jdbc:mysql://${MYSQL_HOST}:$[MYSQL_PORT}/${MYSQL_DB}?createDatabaseIfNotExist=true
+DATABASE_USERNAME=root
+DATABASE_PASSWORD=supersecretpassword
+```
 
 ### Start the project
 
-  - run `mvn clean install` in a terminal to get all the needed dependencies and to build the project
-  - Run -> Run -> choose the configuration you set
+  - run `gradle clean build` in a terminal or in InteliJ Gradle menu to get all the needed dependencies and to build the project
+  - run `docker-compose up -d --build` in a terminal in the root folder
+     - This command will start a MySQL DB and the App in a docker containers with the properties we've entered in the .env file
+  - when you Run -> Run in InteliJ, the application will run locally with H2 database
   - The app should be running on localhost:8080
