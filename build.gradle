@@ -2,6 +2,31 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.1'
 	id 'io.spring.dependency-management' version '1.1.5'
+	id "org.sonarqube" version "4.4.1.3373"
+	id 'jacoco'
+}
+
+jacoco {
+	toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required.set(true)
+	}
+}
+
+test {
+	finalizedBy jacocoTestReport // Run JaCoCo after tests
+}
+
+sonar {
+	properties {
+		property "sonar.projectKey", "Intership-2024_learning-management-plathorm-api"
+		property "sonar.organization", "intership-2024"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
 }
 
 group = 'com.lms'
