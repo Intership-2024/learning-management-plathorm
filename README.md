@@ -34,3 +34,6 @@ DATABASE_PASSWORD=supersecretpassword
      - This command will start a MySQL DB and the App in a docker containers with the properties we've entered in the .env file
   - when you Run -> Run in InteliJ, the application will run locally with H2 database
   - The app should be running on localhost:8080
+
+
+### Api Documentation
