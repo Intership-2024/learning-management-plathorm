@@ -35,3 +35,5 @@ DATABASE_PASSWORD=supersecretpassword
   - when you Run -> Run in InteliJ, the application will run locally with H2 database
   - The app should be running on localhost:8080
 
+
+### Api Documentation
