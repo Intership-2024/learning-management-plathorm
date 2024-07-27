@@ -36,4 +36,3 @@ DATABASE_PASSWORD=supersecretpassword
   - The app should be running on localhost:8080
 
 
-### Api Documentation
