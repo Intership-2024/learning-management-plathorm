@@ -1,14 +1,8 @@
 package com.lms.learning_management_system.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CourseEntity {
     @Id
     @GeneratedValue
