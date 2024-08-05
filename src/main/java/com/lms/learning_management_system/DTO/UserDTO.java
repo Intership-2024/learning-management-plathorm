@@ -2,6 +2,8 @@ package com.lms.learning_management_system.DTO;
 
 
 
+import com.lms.learning_management_system.entities.RoleEnum;
+
 import java.util.UUID;
 
 public class UserDTO {
@@ -54,8 +56,8 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public RoleEnum getRole() {
+        return RoleEnum.fromString(role);
     }
 
     public void setRole(String role) {
