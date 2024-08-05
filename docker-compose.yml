@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    networks:
+      - lmsNetwork
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    image: lms # Replace with your actual application image
+    container_name: app
+    networks:
+      - lmsNetwork
+    build:
+      context: .
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DB: ${MYSQL_DB}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_URL: jdbc:mysql://mysql:${MYSQL_PORT}/${MYSQL_DB}?createDatabaseIfNotExist=true
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+
+networks:
+  lmsNetwork:
+    driver: bridge
