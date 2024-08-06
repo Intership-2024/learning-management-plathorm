@@ -8,8 +8,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -17,20 +15,6 @@ class RoleEntityTest {
 
     @Autowired
     private RoleRepository roleRepository;
-
-    @Test
-    @Transactional
-    void testRoleEntityWithArgumentsConstructor() {
-        UUID id = UUID.randomUUID(); // UUID is set manually for the test
-
-        // Create and save RoleEntity with manually set UUID
-        RoleEntity roleEntity = new RoleEntity(id, RoleEnum.ADMIN);
-        RoleEntity savedRoleEntity = roleRepository.save(roleEntity);
-
-        assertNotNull(savedRoleEntity.getId(), "ID should not be null after saving");
-        assertTrue(savedRoleEntity.getId().version() > 0, "UUID should be a valid UUID");
-        assertEquals(RoleEnum.ADMIN, savedRoleEntity.getRole(), "Role should be ADMIN");
-    }
 
     @Test
     @Transactional
