@@ -1,10 +1,10 @@
 package com.lms.learning_management_system.entities.service;
 
-
+import com.lms.learning_management_system.DTO.UserDTO;
 import com.lms.learning_management_system.entities.RoleEntity;
 import com.lms.learning_management_system.entities.RoleEnum;
 import com.lms.learning_management_system.entities.UserEntity;
-import com.lms.learning_management_system.DTO.UserDTO;
+import com.lms.learning_management_system.exception.UserAlreadyExistsException;
 import com.lms.learning_management_system.exception.UserNotFoundException;
 import com.lms.learning_management_system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,12 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO userDTO) {
-        UserEntity userEntity = convertToEntity(userDTO);
+        Optional<UserEntity> existingUser = userRepository.findByEmail(userDTO.getEmail());
+        if (existingUser.isPresent()) {
+            throw new UserAlreadyExistsException("User with email " + userDTO.getEmail() + " already exists");
+        }
+        UserEntity userEntity = new UserEntity();
+        userEntity = convertToEntity(userEntity, userDTO);
         userEntity = userRepository.save(userEntity);
         return convertToDTO(userEntity);
     }
@@ -43,12 +48,7 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
 
-        userEntity.setFirstName(userDTO.getFirstName());
-        userEntity.setLastName(userDTO.getLastName());
-        userEntity.setEmail(userDTO.getEmail());
-        // Assuming role mapping is handled elsewhere
-        // userEntity.setRole(userDTO.getRole());
-
+        userEntity = convertToEntity(userEntity, userDTO);
         userEntity = userRepository.save(userEntity);
         return convertToDTO(userEntity);
     }
@@ -65,14 +65,14 @@ public class UserService {
                 userEntity.getEmail(), userEntity.getRole().getRole().toString());
     }
 
-    private UserEntity convertToEntity(UserDTO userDTO) {
-        UserEntity userEntity = new UserEntity();
-        RoleEntity roleEntity = new RoleEntity();
+    private UserEntity convertToEntity(UserEntity userEntity, UserDTO userDTO) {
         userEntity.setFirstName(userDTO.getFirstName());
         userEntity.setLastName(userDTO.getLastName());
         userEntity.setEmail(userDTO.getEmail());
-        roleEntity.setRole(userDTO.getRole());
+
+        RoleEntity roleEntity = userEntity.getRole();
         userEntity.setRole(roleEntity);
+
         return userEntity;
     }
 }

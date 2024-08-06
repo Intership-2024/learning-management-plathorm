@@ -69,6 +69,8 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.6.0.RC1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-core'
 }
 
 tasks.named('test') {
