@@ -1,7 +1,6 @@
 package com.lms.learning_management_system.controller;
 
 import com.lms.learning_management_system.DTO.UserDTO;
-import com.lms.learning_management_system.entities.UserEntity;
 import com.lms.learning_management_system.entities.service.UserService;
 import com.lms.learning_management_system.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +8,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping
     public UserDTO createUser(@RequestBody UserDTO userDTO) {

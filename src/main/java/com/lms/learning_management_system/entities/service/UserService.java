@@ -13,30 +13,34 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+    String userWithId = "User with Id";
+    String notFound = "Not found";
     @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(this::convertToDTO)
-                .collect(Collectors.toList());
+                .toList(); // Use Stream.toList() for an immutable list
     }
 
     public UserDTO getUserById(UUID id) {
         return userRepository.findById(id)
                 .map(this::convertToDTO)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(() -> new UserNotFoundException(userWithId + " " + id + " " + notFound));
     }
 
     public UserDTO createUser(UserDTO userDTO) {
         Optional<UserEntity> existingUser = userRepository.findByEmail(userDTO.getEmail());
         if (existingUser.isPresent()) {
-            throw new UserAlreadyExistsException("User with email " + userDTO.getEmail() + " already exists");
+            throw new UserAlreadyExistsException(userWithId + " " + userDTO.getEmail() + " already exists");
         }
         UserEntity userEntity = new UserEntity();
         userEntity = convertToEntity(userEntity, userDTO);
@@ -46,7 +50,7 @@ public class UserService {
 
     public UserDTO updateUser(UUID id, UserDTO userDTO) {
         UserEntity userEntity = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+                .orElseThrow(() -> new UserNotFoundException(userWithId + " " + id + " " + notFound));
 
         userEntity = convertToEntity(userEntity, userDTO);
         userEntity = userRepository.save(userEntity);
@@ -55,7 +59,7 @@ public class UserService {
 
     public void deleteUser(UUID id) {
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User with id " + id + " not found");
+            throw new UserNotFoundException(userWithId + " " + id + " " + notFound);
         }
         userRepository.deleteById(id);
     }

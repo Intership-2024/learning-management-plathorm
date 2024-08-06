@@ -70,13 +70,16 @@ class UserDTOTest {
 
     @Test
     void testInvalidRole() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            userDTO.setRole("INVALID_ROLE");
+        // First, set an invalid role to trigger the exception
+        userDTO.setRole("INVALID_ROLE");
+
+        // Then, verify that getting the role results in an exception
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             userDTO.getRole();
         });
 
         String expectedMessage = "No enum constant for role: INVALID_ROLE";
-        String actualMessage = exception.getMessage();
+        String actualMessage = thrown.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
