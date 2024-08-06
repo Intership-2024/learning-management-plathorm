@@ -6,6 +6,9 @@ public enum RoleEnum {
     TEACHER;
 
     public static RoleEnum fromString(String role) {
+        if (role == null) {
+            return null; // Handle null input
+        }
         for (RoleEnum r : RoleEnum.values()) {
             if (r.name().equalsIgnoreCase(role)) {
                 return r;
@@ -14,4 +17,3 @@ public enum RoleEnum {
         throw new IllegalArgumentException("No enum constant for role: " + role);
     }
 }
-
