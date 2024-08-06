@@ -6,7 +6,7 @@ import com.lms.learning_management_system.entities.UserEntity;
 import com.lms.learning_management_system.exception.UserAlreadyExistsException;
 import com.lms.learning_management_system.exception.UserNotFoundException;
 import com.lms.learning_management_system.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +14,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    String userWithId = "User with Id";
-    String notFound = "Not found";
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private static final String userWithId = "User with Id";
+    private static final String notFound = "Not found";
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
