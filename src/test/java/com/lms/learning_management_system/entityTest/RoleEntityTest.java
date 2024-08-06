@@ -16,23 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoleEntityTest {
 
     @Autowired
-    private RoleRepository roleRepository; // Assuming you have a repository for RoleEntity
-
-    RoleEntityTest(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    private RoleRepository roleRepository;
 
     @Test
     @Transactional
     void testRoleEntityWithArgumentsConstructor() {
-        UUID id = UUID.randomUUID();
-        RoleEntity roleEntity = new RoleEntity(id, RoleEnum.ADMIN);
+        UUID id = UUID.randomUUID(); // UUID is set manually for the test
 
+        // Create and save RoleEntity with manually set UUID
+        RoleEntity roleEntity = new RoleEntity(id, RoleEnum.ADMIN);
         RoleEntity savedRoleEntity = roleRepository.save(roleEntity);
 
-        assertNotNull(savedRoleEntity.getId()); // Ensure ID is not null after save
-        assertEquals(id, savedRoleEntity.getId()); // Check that the ID is as expected
-        assertEquals(RoleEnum.ADMIN, savedRoleEntity.getRole()); // Verify the role
+        assertNotNull(savedRoleEntity.getId(), "ID should not be null after saving");
+        assertTrue(savedRoleEntity.getId().version() > 0, "UUID should be a valid UUID");
+        assertEquals(RoleEnum.ADMIN, savedRoleEntity.getRole(), "Role should be ADMIN");
     }
 
     @Test
@@ -40,8 +37,8 @@ class RoleEntityTest {
     void testRoleEntityNoArgsConstructor() {
         RoleEntity roleEntity = new RoleEntity();
 
-        assertNull(roleEntity.getId()); // Verify that ID is null before saving
-        assertNull(roleEntity.getRole()); // Verify that role is null before saving
+        assertNull(roleEntity.getId(), "ID should be null before saving");
+        assertNull(roleEntity.getRole(), "Role should be null before saving");
     }
 
     @Test
@@ -52,8 +49,9 @@ class RoleEntityTest {
 
         RoleEntity savedRoleEntity = roleRepository.save(roleEntity);
 
-        assertNotNull(savedRoleEntity.getId()); // Ensure ID is generated and not null
-        assertEquals(RoleEnum.STUDENT, savedRoleEntity.getRole()); // Verify the role after save
+        assertNotNull(savedRoleEntity.getId(), "ID should be generated and not null");
+        assertTrue(savedRoleEntity.getId().version() > 0, "UUID should be a valid UUID");
+        assertEquals(RoleEnum.STUDENT, savedRoleEntity.getRole(), "Role should be STUDENT");
     }
 
     @Test
@@ -62,6 +60,6 @@ class RoleEntityTest {
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setRole(RoleEnum.TEACHER);
 
-        assertEquals(RoleEnum.TEACHER, roleEntity.getRole()); // Verify that the setter correctly sets the role
+        assertEquals(RoleEnum.TEACHER, roleEntity.getRole(), "Role should be set correctly");
     }
 }
