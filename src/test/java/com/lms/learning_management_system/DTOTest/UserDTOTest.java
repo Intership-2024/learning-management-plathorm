@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.DTOTest;
 
-import com.lms.learning_management_system.DTO.UserDTO;
+import com.lms.learning_management_system.dto.UserDTO;
 import com.lms.learning_management_system.entities.RoleEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

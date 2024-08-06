@@ -1,4 +1,4 @@
-package com.lms.learning_management_system.DTO;
+package com.lms.learning_management_system.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -13,11 +13,12 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ModuleDTO {
+public class CourseDTO {
     private UUID id;
     private String title;
     private String description;
-    private List<UUID> lectionIds;
+    private UUID teacherId;
+    private List<UUID> studentIds;
 
 }
 

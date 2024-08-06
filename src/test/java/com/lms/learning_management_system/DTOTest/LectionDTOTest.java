@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.DTOTest;
 
-import com.lms.learning_management_system.DTO.LectionDTO;
+import com.lms.learning_management_system.dto.LectionDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

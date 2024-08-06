@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.mapper;
 
-import com.lms.learning_management_system.DTO.LectionDTO;
+import com.lms.learning_management_system.dto.LectionDTO;
 import com.lms.learning_management_system.entities.LectionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

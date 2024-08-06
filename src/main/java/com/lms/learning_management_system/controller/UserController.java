@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.controller;
 
-import com.lms.learning_management_system.DTO.UserDTO;
+import com.lms.learning_management_system.dto.UserDTO;
 import com.lms.learning_management_system.entities.service.UserService;
 import com.lms.learning_management_system.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

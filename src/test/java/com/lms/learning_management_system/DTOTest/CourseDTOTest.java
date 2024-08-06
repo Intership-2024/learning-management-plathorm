@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.DTOTest;
 
-import com.lms.learning_management_system.DTO.CourseDTO;
+import com.lms.learning_management_system.dto.CourseDTO;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.UUID;

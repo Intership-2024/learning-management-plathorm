@@ -1,8 +1,7 @@
 package com.lms.learning_management_system.entities.service;
 
-import com.lms.learning_management_system.DTO.UserDTO;
+import com.lms.learning_management_system.dto.UserDTO;
 import com.lms.learning_management_system.entities.RoleEntity;
-import com.lms.learning_management_system.entities.RoleEnum;
 import com.lms.learning_management_system.entities.UserEntity;
 import com.lms.learning_management_system.exception.UserAlreadyExistsException;
 import com.lms.learning_management_system.exception.UserNotFoundException;

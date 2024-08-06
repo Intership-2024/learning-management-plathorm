@@ -1,4 +1,4 @@
-package com.lms.learning_management_system.DTO;
+package com.lms.learning_management_system.dto;
 
 import com.lms.learning_management_system.entities.RoleEnum;
 import lombok.AllArgsConstructor;

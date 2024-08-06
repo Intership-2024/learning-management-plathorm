@@ -1,6 +1,6 @@
 package com.lms.learning_management_system.DTOTest;
 
-import com.lms.learning_management_system.DTO.ModuleDTO;
+import com.lms.learning_management_system.dto.ModuleDTO;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
