@@ -18,8 +18,8 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
-    private static final String userWithId = "User with Id";
-    private static final String notFound = "Not found";
+    private static final String USER_WITH_ID = "User with Id";
+    private static final String NOT_FOUND = "Not found";
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
@@ -30,13 +30,13 @@ public class UserService {
     public UserDTO getUserById(UUID id) {
         return userRepository.findById(id)
                 .map(this::convertToDTO)
-                .orElseThrow(() -> new UserNotFoundException(userWithId + " " + id + " " + notFound));
+                .orElseThrow(() -> new UserNotFoundException(USER_WITH_ID + " " + id + " " + NOT_FOUND));
     }
 
     public UserDTO createUser(UserDTO userDTO) {
         Optional<UserEntity> existingUser = userRepository.findByEmail(userDTO.getEmail());
         if (existingUser.isPresent()) {
-            throw new UserAlreadyExistsException(userWithId + " " + userDTO.getEmail() + " already exists");
+            throw new UserAlreadyExistsException(USER_WITH_ID + " " + userDTO.getEmail() + " already exists");
         }
         UserEntity userEntity = new UserEntity();
         userEntity = convertToEntity(userEntity, userDTO);
@@ -46,7 +46,7 @@ public class UserService {
 
     public UserDTO updateUser(UUID id, UserDTO userDTO) {
         UserEntity userEntity = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(userWithId + " " + id + " " + notFound));
+                .orElseThrow(() -> new UserNotFoundException(USER_WITH_ID + " " + id + " " + NOT_FOUND));
 
         userEntity = convertToEntity(userEntity, userDTO);
         userEntity = userRepository.save(userEntity);
@@ -55,7 +55,7 @@ public class UserService {
 
     public void deleteUser(UUID id) {
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException(userWithId + " " + id + " " + notFound);
+            throw new UserNotFoundException(USER_WITH_ID + " " + id + " " + NOT_FOUND);
         }
         userRepository.deleteById(id);
     }
